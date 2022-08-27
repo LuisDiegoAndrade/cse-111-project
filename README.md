@@ -15,7 +15,7 @@ Project for cse 111 at UC Merced
 ## Creating Virtual Environment & Installing Requirements
 
 - *using python3
-- command below will create a directory named cse111_project
+- create a directory named cse111_project
 ```python -m venv cse111_project_env```
 
 - activate virtual environment by sourcing the activate binary
