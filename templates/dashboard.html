@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+{% block content %}
+<style media="screen">
+   html {
+   min-height: 100%;
+   display: grid;
+   }
+   body {
+   font-family: 'Baskervville', serif;
+   display: grid;
+   /*overflow: hidden;*/
+   }
+</style>
+
+<div class="container">
+
+   <div class="row">
+
+      <!-- SQL Input-->
+      <div class="col-md-8 content-section">
+        <br>
+         <h3 class='text-muted'>SQL Statement</h3>
+         <br>
+           <div style="padding: 0px 3em 0px 3em" class="form-group">
+             <form id="queryform">
+               <pre><textarea style="width: 100%;" name="query"></textarea></pre>
+               <ul class="list-group"><button id="execButton" class="btn btn-outline-info" type="submit">execute</button></ul>
+             </form>
+           </div>
+         <p class='text-muted'>SQLite3 database  </p>
+      </div>
+
+      <div class="col-md-4">
+         <div class="content-section">
+           <br>
+            <h3>Execution Status</h3>
+            <br>
+            <div class="col-md-12">
+              <marquee truespeed=60>
+                <div style="text-align: center" id="execStatus" class="alert alert-dark">
+                  IDLE
+                </div>
+              </marquee>
+            </div>
+         </div>
+      </div>
+   </div>
+
+
+   <div class="row">
+      <div class="col-md-12 content-section">
+        <br>
+         <h3 class='text-muted'>Execution Results</h3>
+         <pre id="result"></pre>
+         <br>
+      </div>
+   </div>
+</div>
+
+<script type="text/javascript">
+  let form = document.getElementById("queryform");
+
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
+  document.getElementById("queryform").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    let data = new FormData(form);
+    //console.log(data.get("query"))
+    try {
+
+      // UX related; disable execute button and change status.
+      document.getElementById("execStatus").setAttribute("class", "alert alert-warning");
+      document.getElementById("execStatus").innerText = "EXECUTING!!";
+      document.getElementById("execButton").setAttribute("disabled", "true");
+      // Noticed cached queries were disregarding new, but similar Querys.
+      let config = {'method': 'post', 'body': data, 'cache-control': 'no-cache', 'pragma': 'no-cache', cache: "no-store"}
+
+      let req = await fetch(`./api/v1/query?${getRandomInt(1000)}`, config);
+      let res = await req.text();
+      console.log(res);
+      document.getElementById("result").innerText = res;
+    } catch (e) {
+      console.log(e);
+      alert("NETWORK ERROR :(");
+    }
+
+    // UX related; re enables button and changes status
+    document.getElementById("execStatus").setAttribute("class", "alert alert-dark");
+    document.getElementById("execStatus").innerText = "IDLE";
+    document.getElementById("execButton").removeAttribute("disabled");
+  });
+
+</script>
+<!--<div style='text-align: left' class="content-section">
+</div>-->
+{% endblock content %}

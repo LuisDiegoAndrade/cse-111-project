@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block content %}
+<style media="screen">
+   html {
+   min-height: 100%;
+   display: grid;
+   }
+   body {
+   font-family: 'Baskervville', serif;
+   display: grid;
+   /*overflow: hidden;*/
+   }
+</style>
+
+<div class="container">
+
+   <div class="row">
+
+      <!-- SQL Input-->
+      <div class="col-md-12 content-section">
+        <br>
+         <h3 class='text-muted'>SQL Statement</h3>
+         <br>
+           
+         <p class='text-muted'>SQLite3 database  </p>
+      </div>
+
+      
+   </div>
+
+
+   <div class="row">
+      <div class="col-md-12 content-section">
+        <br>
+         <h3 class='text-muted'>Execution Results</h3>
+         <pre id="result"></pre>
+         <br>
+      </div>
+   </div>
+</div>
+
+
+<!--<div style='text-align: left' class="content-section">
+</div>-->
+{% endblock content %}

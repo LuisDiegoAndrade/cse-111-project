@@ -20,7 +20,14 @@ s = Session()
 ## is google
 
 # Escape "-" character in table name by wrapping table name in back ticks
-result = s.execute('SELECT * FROM `cve-vendors-products` WHERE vendor = :val', {'val': "google"})
+result = s.execute('SELECT * FROM `cveitems` WHERE ROWID = :val', {'val': 2})
+# iterate through results
+for item in result:
+    print(item)
+
+print() # newline
+
+result = s.execute('SELECT * FROM `cve-vendors-products` WHERE ROWID = :val', {'val': 2})
 
 # iterate through results
 for item in result:
