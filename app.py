@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import request, Response, render_template, redirect, url_for, send_file
+import get_image
 import sqlalchemy
 from sqlalchemy.orm import sessionmaker, scoped_session
 
@@ -14,7 +15,6 @@ def add_header(r):
     r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
     r.headers["Pragma"] = "no-cache"
     r.headers["Expires"] = "0"
-
     return r
 
 @app.route("/")
@@ -25,37 +25,13 @@ def index():
 def styles():
     return render_template("styleGuide.html")
 
-@app.route("/app/eventdata")
-def get_events_in_radius():
-    eventData = '''{
-    "eventData": [
-        {
-            "eventId": "1",
-            "lat": "37.3669",
-            "long": "-120.4247",
-            "title": "CSE Study Sesh",
-            "description": "Study with us for the exam."
-        },
+@app.route("/vendors")
+def vendors():
+    return render_template("byVendor.html")
 
-        {
-            "eventId": "2",
-            "lat": "37.3675",
-            "long": "-120.4231",
-            "title": "Potluck",
-            "description": "Muchies!"
-        },
-
-        {
-            "eventId": "3",
-            "lat": "37.3663",
-            "long": "-120.4218",
-            "title": "Hackathon",
-            "description": "Join our hackathon team!"
-        }
-
-     ]
-    }'''
-    return eventData
+@app.route("/products")
+def products():
+    return render_template("byProduct.html")
 
 
 @app.route("/api/v1/query", methods=["GET", "POST"])
@@ -90,4 +66,4 @@ def query():
 
 
 if __name__ == '__main__':
-    Flask.run(app, host="0.0.0.0", port="7777", debug=True)
+    Flask.run(app, port="7777", debug=True)
