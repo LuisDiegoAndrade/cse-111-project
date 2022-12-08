@@ -1,0 +1,117 @@
+{% extends "layout.html" %}
+{% block content %}
+<style media="screen">
+   html {
+   min-height: 100%;
+   display: grid;
+   }
+   body {
+   font-family: 'Baskervville', serif;
+   display: grid;
+   /*overflow: hidden;*/
+   }
+   body {
+    background-color: #eee
+}
+
+.card {
+    border: none;
+    border-radius: 10px
+}
+
+.c-details span {
+    font-weight: 300;
+    font-size: 13px
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    background-color: #eee;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 39px
+}
+
+.badge span {
+    background-color: #fffbec;
+    width: 60px;
+    height: 25px;
+    padding-bottom: 3px;
+    border-radius: 5px;
+    display: flex;
+    color: #fed85d;
+    justify-content: center;
+    align-items: center
+}
+
+.progress {
+    height: 10px;
+    border-radius: 10px
+}
+
+.progress div {
+    background-color: red
+}
+
+.text1 {
+    font-size: 14px;
+    font-weight: 600
+}
+
+.text2 {
+    color: #a5aec0
+}
+</style>
+
+
+{% for value in result %}
+<div class="container mt-5 mb-3">
+   <div class="row">
+   <div class="col-md-12">
+      <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+         <h1 class="display-4">{{value[0]}}</h1>
+         <p class="lead">{{value[1]}}</p>
+      </div>
+   </div>
+   <div class="container">
+      <div class="card-deck mb-3 text-center">
+         <div class="card mb-4 box-shadow">
+            <div class="card-header">
+               <h4 class="my-0 font-weight-normal">Access Vector</h4>
+            </div>
+            <div class="card-body">
+               <h1 class="card-title pricing-card-title">{{value[2]}}</h1>
+            </div>
+         </div>
+         <div class="card mb-4 box-shadow">
+            <div class="card-header">
+               <h4 class="my-0 font-weight-normal">Access Complexity</h4>
+            </div>
+            <div class="card-body">
+               <h1 class="card-title pricing-card-title">{{value[3]}}</h1>
+
+            </div>
+         </div>
+         <div class="card mb-4 box-shadow">
+            <div class="card-header">
+               <h4 class="my-0 font-weight-normal">Date Published</h4>
+            </div>
+            <div class="card-body">
+               <h1 class="card-title pricing-card-title">{{value[4]}}</h1>
+
+
+            </div>
+         </div>
+      </div>
+
+   </div>
+</div>
+</div>
+{% endfor %}
+
+<!--<div style='text-align: left' class="content-section">
+</div>-->
+{% endblock content %}
